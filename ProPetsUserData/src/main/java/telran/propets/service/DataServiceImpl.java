@@ -83,6 +83,7 @@ public class DataServiceImpl implements DataService {
 	}
 
 	private Set<LostFoundResponseDto> responseFromLostFound(Set<String> postId) {
+		Set<LostFoundResponseDto> result = new TreeSet<>((e1, e2) -> e2.getDatePost().compareTo(e1.getDatePost()));
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<Set<LostFoundResponseDto>> responseEntity = null;
 		try {
@@ -93,7 +94,8 @@ public class DataServiceImpl implements DataService {
 		} catch (URISyntaxException e) {
 			throw new BadRequestException();
 		}
-		return responseEntity.getBody();
+		result.addAll(responseEntity.getBody());
+		return result;
 	}
 
 	private Map<String, Set<String>> getDataFromAccount(String login, boolean dataType) {
