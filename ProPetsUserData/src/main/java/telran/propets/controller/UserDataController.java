@@ -13,7 +13,7 @@ import telran.propets.service.DataServiceImpl;
 
 @RestController
 @RequestMapping("/{lang}/v1")
-public class DataServiceController {
+public class UserDataController {
 	
 	@Autowired
 	DataServiceImpl dataServiceImpl;

@@ -103,11 +103,12 @@ public class DataServiceImpl implements DataService {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(dataConfiguration.getDataAccountUri()).queryParam("dataType", dataType);
 		ResponseEntity<Map<String, Set<String>>> responseEntity = null;
 		try {
-			RequestEntity<String> requestEntity = new RequestEntity<>(HttpMethod.GET,
-					builder.buildAndExpand(login).toUri());
-			responseEntity = restTemplate.exchange(requestEntity,
-					new ParameterizedTypeReference<Map<String, Set<String>>>() {
-					});
+			RequestEntity<String> requestEntity = new RequestEntity<>(HttpMethod.GET,builder.buildAndExpand(login).toUri());
+			responseEntity = restTemplate.exchange(requestEntity, new ParameterizedTypeReference<Map<String, Set<String>>>() {});
+//			
+			for (String e : responseEntity.getBody().keySet()) {
+				System.out.println(e);
+			}
 		} catch (RestClientException e) {
 			throw new ConflictException();
 		}
