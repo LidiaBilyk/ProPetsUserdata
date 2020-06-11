@@ -1,4 +1,4 @@
-package telran.propets.security.filter;
+package propets.userdata.security.filter;
 
 import java.io.IOException;
 import java.net.URI;
@@ -23,7 +23,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import telran.propets.configuration.DataConfiguration;
+import propets.userdata.configuration.DataConfiguration;
 
 
 

@@ -1,4 +1,4 @@
-package telran.propets.service;
+package propets.userdata.service;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -16,12 +16,12 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import telran.propets.configuration.DataConfiguration;
-import telran.propets.dto.LostFoundResponseDto;
-import telran.propets.dto.OtherResponseDto;
-import telran.propets.dto.ResponseDto;
-import telran.propets.exceptions.BadRequestException;
-import telran.propets.exceptions.ConflictException;
+import propets.userdata.configuration.DataConfiguration;
+import propets.userdata.dto.LostFoundResponseDto;
+import propets.userdata.dto.OtherResponseDto;
+import propets.userdata.dto.ResponseDto;
+import propets.userdata.exceptions.BadRequestException;
+import propets.userdata.exceptions.ConflictException;
 
 @Service
 public class DataServiceImpl implements DataService {
@@ -72,7 +72,8 @@ public class DataServiceImpl implements DataService {
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<Set<OtherResponseDto>> responseEntity = null;
 		try {
-			RequestEntity<Set<String>> requestEntity = new RequestEntity<Set<String>>(postId, HttpMethod.POST, new URI(dataServiceUri));
+			RequestEntity<Set<String>> requestEntity = new RequestEntity<Set<String>>(postId, HttpMethod.POST,
+					new URI(dataServiceUri));
 			responseEntity = restTemplate.exchange(requestEntity, new ParameterizedTypeReference<Set<OtherResponseDto>>() {});
 		} catch (RestClientException e) {
 			throw new ConflictException();
@@ -87,7 +88,8 @@ public class DataServiceImpl implements DataService {
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<Set<LostFoundResponseDto>> responseEntity = null;
 		try {
-			RequestEntity<Set<String>> requestEntity = new RequestEntity<Set<String>>(postId, HttpMethod.POST,new URI(dataConfiguration.getDataLostFoundUri()));
+			RequestEntity<Set<String>> requestEntity = new RequestEntity<Set<String>>(postId, HttpMethod.POST,
+					new URI(dataConfiguration.getDataLostFoundUri()));
 			responseEntity = restTemplate.exchange(requestEntity, new ParameterizedTypeReference<Set<LostFoundResponseDto>>() {});
 		} catch (RestClientException e) {
 			throw new ConflictException();
@@ -100,15 +102,12 @@ public class DataServiceImpl implements DataService {
 
 	private Map<String, Set<String>> getDataFromAccount(String login, boolean dataType) {
 		RestTemplate restTemplate = new RestTemplate();
-		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(dataConfiguration.getDataAccountUri()).queryParam("dataType", dataType);
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(dataConfiguration.getDataAccountUri())
+				.queryParam("dataType", dataType);
 		ResponseEntity<Map<String, Set<String>>> responseEntity = null;
 		try {
-			RequestEntity<String> requestEntity = new RequestEntity<>(HttpMethod.GET,builder.buildAndExpand(login).toUri());
+			RequestEntity<String> requestEntity = new RequestEntity<>(HttpMethod.GET, builder.buildAndExpand(login).toUri());
 			responseEntity = restTemplate.exchange(requestEntity, new ParameterizedTypeReference<Map<String, Set<String>>>() {});
-//			
-			for (String e : responseEntity.getBody().keySet()) {
-				System.out.println(e);
-			}
 		} catch (RestClientException e) {
 			throw new ConflictException();
 		}

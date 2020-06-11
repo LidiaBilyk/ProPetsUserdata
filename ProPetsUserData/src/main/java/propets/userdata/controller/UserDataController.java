@@ -1,4 +1,4 @@
-package telran.propets.controller;
+package propets.userdata.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import telran.propets.dto.ResponseDto;
-import telran.propets.service.DataServiceImpl;
+import propets.userdata.dto.ResponseDto;
+import propets.userdata.service.DataServiceImpl;
 
 @RestController
 @RequestMapping("/{lang}/v1")

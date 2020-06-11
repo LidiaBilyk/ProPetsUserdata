@@ -1,6 +1,6 @@
-package telran.propets.service;
+package propets.userdata.service;
 
-import telran.propets.dto.ResponseDto;
+import propets.userdata.dto.ResponseDto;
 
 public interface DataService {
 	

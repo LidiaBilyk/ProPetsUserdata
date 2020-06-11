@@ -1,4 +1,4 @@
-package telran.propets.dto;
+package propets.userdata.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -8,22 +8,19 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Singular;
-import telran.propets.model.Location;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Builder
-public class LostFoundResponseDto {
+public class OtherResponseDto {
 	String id;
 	String userLogin;
-	LocalDateTime datePost;
-	String type;
+    String username; 
+    String avatar;
+	LocalDateTime datePost;	
+	String text;
 	@Singular
-	List<String> tags;
-	@Singular
-	List<String> photos;
-	Location location;
-	int radius;
+	List<String> images;
 
 }

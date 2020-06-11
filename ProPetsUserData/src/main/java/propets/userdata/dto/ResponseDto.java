@@ -1,4 +1,4 @@
-package telran.propets.dto;
+package propets.userdata.dto;
 
 import java.util.Set;
 

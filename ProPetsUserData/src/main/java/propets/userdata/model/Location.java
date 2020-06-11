@@ -1,4 +1,4 @@
-package telran.propets.model;
+package propets.userdata.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
