@@ -9,10 +9,6 @@ import lombok.NoArgsConstructor;
 @Getter
 
 public class Location {
-	String country;
-    String city;
-    String street;
-    int building;
 	double longitude;
 	double latitude;
 	
