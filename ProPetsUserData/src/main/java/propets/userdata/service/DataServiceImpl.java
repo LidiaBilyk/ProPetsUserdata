@@ -40,7 +40,6 @@ public class DataServiceImpl implements DataService {
 			for (String key : dataFromAccount.keySet()) {
 				if ("lostfound".equalsIgnoreCase(key)) {
 					lostFoundPosts = responseFromLostFound(dataFromAccount.get(key));
-					dataFromAccount.remove(key);
 				} else {
 					otherPosts = responseFromOtherServices(dataFromAccount);
 				}
