@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Singular;
+import propets.userdata.model.Address;
 import propets.userdata.model.Location;
 
 @AllArgsConstructor
@@ -23,6 +24,7 @@ public class LostFoundResponseDto {
 	List<String> tags;
 	@Singular
 	List<String> photos;
+	Address address;
 	Location location;
 	int radius;
 
