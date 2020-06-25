@@ -18,9 +18,8 @@ public class UserDataController {
 	@Autowired
 	DataServiceImpl dataServiceImpl;
 	
-	@GetMapping("/{login:.*}")
-	public ResponseDto getData(@PathVariable String login, @RequestParam boolean dataType, @RequestHeader("X-token") String token) {
+	@GetMapping("/{login:.*}/favorites")
+	public ResponseDto getrData(@PathVariable String login, @RequestParam boolean dataType, @RequestHeader("X-token") String token) {
 		return dataServiceImpl.getData(login, dataType);
 	}
-
 }
