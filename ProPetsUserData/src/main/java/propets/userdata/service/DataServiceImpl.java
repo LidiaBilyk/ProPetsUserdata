@@ -94,8 +94,8 @@ public class DataServiceImpl implements DataService {
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<Set<OtherResponseDto>> responseEntity = null;
 		try {
-			RequestEntity<Set<String>> requestEntity = new RequestEntity<Set<String>>(HttpMethod.POST,
-					new URI(dataServiceUri.concat(login)));
+			RequestEntity<Set<String>> requestEntity = new RequestEntity<Set<String>>(HttpMethod.GET,
+					new URI(dataServiceUri.concat("/").concat(login)));
 			responseEntity = restTemplate.exchange(requestEntity, new ParameterizedTypeReference<Set<OtherResponseDto>>() {});
 		} catch (RestClientException e) {
 			throw new ConflictException();
@@ -127,8 +127,8 @@ public class DataServiceImpl implements DataService {
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<Set<LostFoundResponseDto>> responseEntity = null;
 		try {
-			RequestEntity<Set<String>> requestEntity = new RequestEntity<Set<String>>(HttpMethod.POST,
-					new URI(dataConfiguration.getDataLostFoundUri().concat(login)));
+			RequestEntity<Set<String>> requestEntity = new RequestEntity<Set<String>>(HttpMethod.GET,
+					new URI(dataConfiguration.getDataLostFoundUri().concat("/").concat(login)));
 			responseEntity = restTemplate.exchange(requestEntity, new ParameterizedTypeReference<Set<LostFoundResponseDto>>() {});
 		} catch (RestClientException e) {
 			throw new ConflictException();
