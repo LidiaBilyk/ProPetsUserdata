@@ -11,7 +11,7 @@ import lombok.Setter;
 @Builder
 public class ResponseDto {
 	
-	Set<LostFoundResponseDto> lostFoundPosts;
-	Set<OtherResponseDto> otherPosts;
+	Set<PostDto> lostFoundPosts;
+	Set<MessageDto> otherPosts;
 
 }

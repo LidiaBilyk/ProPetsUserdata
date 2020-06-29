@@ -39,25 +39,28 @@ public class AuthenticationFilter implements Filter{
 			throws IOException, ServletException, RestClientException {			
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
-			String auth = request.getHeader("X-Token");
-			HttpHeaders headers = new HttpHeaders();
-			headers.add("X-Token", auth);
-			RestTemplate restTemplate = new RestTemplate();	
-			ResponseEntity<String> restResponse = null;
-			try {
-				RequestEntity<String> restRequest = new RequestEntity<>(headers, HttpMethod.GET, new URI(dataConfiguration.getCheckJwtUri()));				
-				restResponse = restTemplate.exchange(restRequest, String.class);				
-			} catch (URISyntaxException e) {
-				response.sendError(400, "Bad request");
-			}catch (HttpClientErrorException e) {				
-				if (e.getStatusCode() != HttpStatus.OK) {					
-					response.sendError(401, "Header Authorization is not valid");
-					return;
+		String path = request.getServletPath();
+			if (!path.matches(".*/updateuser")) {
+				String auth = request.getHeader("X-Token");
+				HttpHeaders headers = new HttpHeaders();
+				headers.add("X-Token", auth);
+				RestTemplate restTemplate = new RestTemplate();
+				ResponseEntity<String> restResponse = null;
+				try {
+					RequestEntity<String> restRequest = new RequestEntity<>(headers, HttpMethod.GET,
+							new URI(dataConfiguration.getCheckJwtUri()));
+					restResponse = restTemplate.exchange(restRequest, String.class);
+				} catch (URISyntaxException e) {
+					response.sendError(400, "Bad request");
+				} catch (HttpClientErrorException e) {
+					if (e.getStatusCode() != HttpStatus.OK) {
+						response.sendError(401, "Header Authorization is not valid");
+						return;
+					}
 				}
-			}			
-			String jwt = restResponse.getHeaders().getFirst("X-Token");				
-			response.addHeader("X-Token", jwt);	
-				
+				String jwt = restResponse.getHeaders().getFirst("X-Token");
+				response.addHeader("X-Token", jwt);
+			}
 		chain.doFilter(request, response);
 	}
 	
